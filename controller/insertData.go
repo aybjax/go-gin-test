@@ -6,7 +6,7 @@ import (
 )
 
 // InsertData -> insert data into db
-func InsertData(data data_structures.InsertData) bool {
+func InsertData(data *data_structures.InsertData) bool {
 	// user_id, device_id, token, os, version
 	stmt := database.InsertStmt()
 

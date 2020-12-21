@@ -12,11 +12,27 @@ var db *sql.DB
 var createTableNotExist *sql.Stmt
 var insertData *sql.Stmt
 var getDataByUser *sql.Stmt
+var getDataByDevice *sql.Stmt
 var deleteData *sql.Stmt
 
 // InsertStmt -> get statement for insertion
 func InsertStmt() *sql.Stmt {
 	return insertData
+}
+
+// DeleteStmt -> get statement for insertion
+func DeleteStmt() *sql.Stmt {
+	return deleteData
+}
+
+// GetUserStmt -> get statement for get
+func GetUserStmt() *sql.Stmt {
+	return getDataByUser
+}
+
+// GetDeviceStmt -> get statement for get
+func GetDeviceStmt() *sql.Stmt {
+	return getDataByDevice
 }
 
 // Close should be called as defer in main()
@@ -76,6 +92,9 @@ func prepareStatements() {
 	errorCheck(err)
 
 	getDataByUser, err = db.Prepare("SELECT * FROM tokens WHERE user_id=?;")
+	errorCheck(err)
+
+	getDataByDevice, err = db.Prepare("SELECT * FROM tokens WHERE device_id=?;")
 	errorCheck(err)
 
 	deleteData, err = db.Prepare("DELETE FROM tokens WHERE token=?;")

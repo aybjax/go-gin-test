@@ -9,22 +9,18 @@ import (
 	"github.com/gin-gonic/gin"
 )
 
-var insertData data_structures.InsertData
+var deleteData data_structures.DeleteData
 
-// Save is handler of saving
-// 		authorized and unauthorized data
-func Save(c *gin.Context) {
-	// zero initialize: or user_id is kept
-	insertData = data_structures.InsertData{}
-	err := c.ShouldBindJSON(&insertData)
+// Delete -> delete token
+func Delete(c *gin.Context) {
+	deleteData = data_structures.DeleteData{}
+	err := c.ShouldBindJSON(&deleteData)
 
 	if err != nil {
 		c.JSON(http.StatusBadRequest, constants.INCORRECT_DATA)
-
-		return
 	}
 
-	if !controller.InsertData(&insertData) {
+	if !controller.DeleteData(&deleteData) {
 		c.JSON(
 			http.StatusInternalServerError,
 			constants.DATABASE_ERROR,
@@ -36,4 +32,5 @@ func Save(c *gin.Context) {
 		http.StatusOK,
 		constants.STATUS_OK,
 	)
+
 }

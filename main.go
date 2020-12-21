@@ -11,12 +11,10 @@ func main() {
 
 	router := gin.Default()
 
-	// if v, ok := binding.Validator.Engine().(*validator.Validate); ok {
-	// 	v.RegisterStructValidation()
-	// }
-
 	router.GET("/ping", handlers.Pong)
-	router.POST("/save", handlers.Save)
+	router.POST("/", handlers.Save)
+	router.DELETE("/", handlers.Delete)
+	router.GET("/", handlers.Get)
 
 	router.Run(":8000")
 }
