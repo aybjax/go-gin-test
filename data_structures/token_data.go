@@ -24,6 +24,12 @@ type GetData struct {
 	// tagname is struct name
 	User   int    `json:"user_id" binding:"excluded_with=Device"`
 	Device string `json:"device_id" binding:"excluded_with=User"`
+
+	// this is incorrect: why?
+	/*
+		User   int    `json:"user_id" binding:"required_without=Device"`
+		Device string `json:"device_id" binding:"required_without=User"`
+	*/
 }
 
 // TokenData -> for data retrieval
