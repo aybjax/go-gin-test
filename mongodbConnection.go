@@ -21,54 +21,111 @@ func main() {
 	clientOptions := options.Client().ApplyURI("mongodb://127.0.0.1:27017")
 	client, err := mongo.Connect(context.TODO(), clientOptions)
 
-	if err != nil {
-		log.Fatal(err)
-	}
+	// if err != nil {
+	// 	log.Fatal(err)
+	// }
 
-	err = client.Ping(context.TODO(), nil)
+	// err = client.Ping(context.TODO(), nil)
 
-	if err != nil {
-		log.Fatal(err)
-	}
+	// if err != nil {
+	// 	log.Fatal(err)
+	// }
 
-	fmt.Println("Connected to MongoDB!")
+	// fmt.Println("Connected to MongoDB!")
 
 	// insert
 	collection := client.Database("aybjax").Collection("persons")
 
-	ruan := Person{"Ruan", 34, "Cape Town"}
+	// ruan := Person{"Ruan", 34, "Cape Town"}
 
-	insertResult, err := collection.InsertOne(context.TODO(), ruan)
-	if err != nil {
-		log.Fatal(err)
-	}
-	fmt.Println("Inserted a Single Document: ", insertResult.InsertedID)
-	fmt.Printf("====>>>> %#v\n", insertResult)
+	// insertResult, err := collection.InsertOne(context.TODO(), ruan)
+	// if err != nil {
+	// 	log.Fatal(err)
+	// }
+	// fmt.Println("Inserted a Single Document: ", insertResult.InsertedID)
+	// fmt.Printf("====>>>> %#v\n", insertResult)
 
 	// insert many
 	// collection := client.Database("mydb").Collection("persons")
 
-	james := Person{"James", 32, "Nairobi"}
-	frankie := Person{"Frankie", 31, "Nairobi"}
+	// james := Person{"James", 32, "Nairobi"}
+	// frankie := Person{"Frankie", 31, "Nairobi"}
 
-	trainers := []interface{}{james, frankie}
+	// trainers := []interface{}{james, frankie}
 
-	insertManyResult, err := collection.InsertMany(context.TODO(), trainers)
+	// insertManyResult, err := collection.InsertMany(context.TODO(), trainers)
+	// if err != nil {
+	// 	log.Fatal(err)
+	// }
+	// fmt.Println("Inserted multiple documents: ", insertManyResult.InsertedIDs)
+
+	// update
+	// filter := bson.D{}
+	// update := bson.D{
+	// 	{"$inc", bson.D{
+	// 		{"age", 1},
+	// 	}},
+	// }
+
+	// updateResult, err := collection.UpdateOne(context.TODO(), filter, update)
+	// // updateResult, err := collection.UpdateMany(context.TODO(), filter, update)
+	// if err != nil {
+	// 	log.Fatal(err)
+	// }
+	// fmt.Printf("Matched %v documents and updated %v documents.\n", updateResult.MatchedCount, updateResult.ModifiedCount)
+
+	// reading single
+	// filter := bson.D{}
+	// var result Person
+
+	// err = collection.FindOne(context.TODO(), filter).Decode(&result)
+	// if err != nil {
+	// 	log.Fatal(err)
+	// }
+
+	// fmt.Printf("Found a single document: %+v\n", result)
+
+	//read many
+	// findOptions := options.Find()
+	// findOptions.SetLimit(2)
+	// var results []*Person
+	// cur, err := collection.Find(context.TODO(), bson.D{}, findOptions)
+	// if err != nil {
+	// 	log.Fatal(err)
+	// }
+
+	// for cur.Next(context.TODO()) {
+	// 	var elem Person
+	// 	err := cur.Decode(&elem)
+	// 	if err != nil {
+	// 		log.Fatal(err)
+	// 	}
+
+	// 	results = append(results, &elem)
+	// 	fmt.Printf("\tvals: %#v\n", elem)
+	// }
+
+	// if err := cur.Err(); err != nil {
+	// 	log.Fatal(err)
+	// }
+
+	// cur.Close(context.TODO())
+	// fmt.Printf("Found multiple documents (array of pointers): %+v\n", results)
+
+	// delete
+	deleteResult, err := collection.DeleteMany(context.TODO(), bson.D{})
 	if err != nil {
 		log.Fatal(err)
 	}
-	fmt.Println("Inserted multiple documents: ", insertManyResult.InsertedIDs)
 
-	filter := bson.D
-	update := bson.D{
-		{"$inc", bson.D{
-			{"age", 1},
-		}},
-	}
+	fmt.Printf("Deleted %v documents in the trainers collection\n", deleteResult.DeletedCount)
 
-	updateResult, err := collection.UpdateOne(context.TODO(), filter, update)
+	err = client.Disconnect(context.TODO())
+
 	if err != nil {
 		log.Fatal(err)
+	} else {
+		fmt.Println("Connection to MongoDB closed.")
 	}
-	fmt.Printf("Matched %v documents and updated %v documents.\n", updateResult.MatchedCount, updateResult.ModifiedCount)
+
 }
