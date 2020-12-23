@@ -17,7 +17,7 @@ type Person struct {
 	City string
 }
 
-func main() {
+func shmain() {
 	/*
 	** connection
 	 */

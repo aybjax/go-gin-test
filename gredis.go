@@ -14,7 +14,7 @@ type Json struct {
 
 // type
 
-func main() {
+func ahmain() {
 	fmt.Println("Go Redis Tutorial")
 
 	/*
