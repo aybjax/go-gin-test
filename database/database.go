@@ -38,6 +38,7 @@ func GetDeviceStmt() *sql.Stmt {
 // Close should be called as defer in main()
 func Close() {
 	db.Close()
+	fmt.Println("Database closed")
 }
 
 func errorCheck(err error) {

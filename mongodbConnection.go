@@ -73,6 +73,11 @@ func main() {
 	** update
 	 */
 	filter := bson.D{}
+	// update := bson.D{
+	// 	{"$inc", bson.D{
+	// 		{"age", 1},
+	// 	}},
+	// }
 	update := bson.D{
 		{"$inc", bson.D{
 			{"age", 1},
