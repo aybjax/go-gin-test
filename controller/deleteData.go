@@ -12,7 +12,6 @@ func DeleteData(data *data_structures.DeleteData) bool {
 	_, err := stmt.Exec(data.Token)
 
 	if err != nil {
-		// fmt.Println(err.Error())
 		return false
 	}
 
