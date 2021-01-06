@@ -1,6 +1,9 @@
+## Простое REST api на gin (golang)
+
+
 ### testing gin go
 
-# Rest api on golang
+### Rest api on golang
 
 #### run 
 `go run main.go`
